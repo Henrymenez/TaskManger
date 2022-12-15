@@ -54,7 +54,41 @@ namespace TaskManger
             }
         }
 
+        public static void StartThread()
+        {
+            Console.WriteLine("----------StartThread--------------");
+            Console.WriteLine("Do you want {1} or {2} threads?");
+            string threadCount = Console.ReadLine();
+            Test(threadCount);
 
+            static void Test(string input)
+            {
+                if (input == "1")
+                {
+                    PrintNumbers();
+                }
+                else
+                {
+                    ThreadStart threadStart = new ThreadStart(PrintNumbers);
+                    Thread backGroundThread = new Thread(threadStart);
+                    backGroundThread.Name = "Secondary";
+                    backGroundThread.Start();
+                   
+                }
+            }
+
+            static void PrintNumbers()
+            {
+                Console.WriteLine($"{Thread.CurrentThread.Name} is running PrintNumbers");
+                Console.WriteLine("Your numbers: ");
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine(i);
+                    Thread.Sleep(2000);
+                }
+                Console.WriteLine();
+            }
+        }
         public static void CheckIsAlive()
         {
             Console.WriteLine("Check if thread is Alive \n Enter Id  of the Thread you want to check ");
