@@ -117,7 +117,7 @@ namespace TaskManger
                     TaskManger.EndAProcess();
                     goto start;
                 case "4":
-                    Threads.CheckingThread();
+                    Threads.ThreadsInAProcess();
                     goto start;
                 case "5":
                     Console.WriteLine("Thank you bye");

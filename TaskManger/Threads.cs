@@ -4,7 +4,7 @@ namespace TaskManger
 {
     internal class Threads : TaskManger
     {
-        public static void CheckingThread()
+        public static void ThreadsInAProcess()
         {
             GetAllRunningProcess();
             var runningProcesses = from proc in Process.GetProcesses()
@@ -23,7 +23,21 @@ namespace TaskManger
                         string info = $"Thread ID: {thread.Id} " +
                             $"\t Start Time: {thread.StartTime.ToShortTimeString()}\t" +
                             $"Priority: {thread.PriorityLevel}";
+                        Console.Clear();
                         Console.WriteLine(info);
+                    }
+                    Console.WriteLine("check if thread is alive {1} or is Background {2}");
+                    string? check = Console.ReadLine();
+                    switch (check)
+                    {
+                        case "1":
+                            CheckIsAlive();
+                            break;
+                        case "2":
+                            CheckIsBackground();
+                            break;
+                        default:
+                            goto Start;
                     }
                 }
                 else
@@ -39,5 +53,24 @@ namespace TaskManger
                 goto Start;
             }
         }
+
+
+        public static void CheckIsAlive()
+        {
+            Console.WriteLine("Check if thread is Alive \n Enter Id  of the Thread you want to check ");
+            int option = Convert.ToInt32(Console.ReadLine());
+            Thread thread;
+            thread = Thread.CurrentThread;
+            Console.WriteLine($"Thread {option} is alive : {thread.IsAlive}");
+        }
+        public static void CheckIsBackground()
+        {
+            Console.WriteLine("Check if thread is Background \n Enter Id  of the Thread you want to check ");
+            int option = Convert.ToInt32(Console.ReadLine());
+            Thread thread;
+            thread = Thread.CurrentThread;
+            Console.WriteLine($"Thread {option} is background : {thread.IsBackground}");
+        }
+
     }
 }
