@@ -97,7 +97,6 @@ namespace TaskManger
         static void Main(string[] args)
         {
             Console.Title = "Task Manger";
-
         start: Console.WriteLine("What would you like to do \n 1. Check all runing Process" +
               "\n 2. Start Process \n 3. Stop a process \n 4.Check if a thread isLive or Background " +
               "\n 5. Exit");
@@ -112,6 +111,13 @@ namespace TaskManger
                 case "2":
                     Console.Clear();
                     TaskManger.StartAProcess();
+                    goto start;
+                case "3":
+                    Console.Clear();
+                    TaskManger.EndAProcess();
+                    goto start;
+                case "4":
+                    Threads.CheckingThread();
                     goto start;
                 case "5":
                     Console.WriteLine("Thank you bye");

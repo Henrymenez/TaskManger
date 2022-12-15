@@ -22,18 +22,18 @@ namespace TaskManger
 
         }
 
+        //start a process
         public static void StartAProcess()
         {
             Process? process = null;
-
             try
             {
                 Console.WriteLine("You want to start a task?\nInput file name");
                 string? taskName = Console.ReadLine();
-                Console.WriteLine("\n What Thread Would you like to start on this task");
+                Console.WriteLine("What Thread Would you like to start on this task(optional)");
                 string? threadName = Console.ReadLine();
                 ProcessStartInfo processStartInfo = new ProcessStartInfo(taskName, threadName);
-                processStartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+                processStartInfo.WindowStyle = ProcessWindowStyle.Normal;
                 processStartInfo.Verb = "Open";
                 processStartInfo.UseShellExecute = true;
                 process = Process.Start(processStartInfo);
@@ -44,45 +44,25 @@ namespace TaskManger
                 Console.WriteLine(ex.Message);
                 StartAProcess();
             }
-
-            /*while (true)
-            {
-                Console.WriteLine("\nDo you want to kill this process \nType 1: Yes\nType 2: No");
-                string options = Console.ReadLine();
-
-                switch (options)
-                {
-                    case "1":
-                        try
-                        {
-                            foreach (var task in Process.GetProcessesByName(_fileName))
-                            {
-                                task.Kill(true);
-                                Console.WriteLine($"You have successfully stopped " +
-                                    $"{task.ProcessName}");
-                            }
-                            Utility.Headers();
-                        }
-                        catch (InvalidOperationException ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
-                        catch (FormatException ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
-                        break;
-                    case "2":
-                        Console.Clear();
-                        Console.WriteLine("\nReturning to Menu...");
-                        Utility.Headers();
-                        break;
-                    default:
-                        Console.WriteLine("Invalid input...");
-                        break;
-                }
-            }*/
         }
 
+        //end a process
+        public static void EndAProcess()
+        {
+            Console.WriteLine("Enter name of the task you want to  terminate");
+          string? option =  Console.ReadLine();
+            try
+            {
+                foreach (var p in Process.GetProcessesByName(option))
+                {
+                    p.Kill(true);
+                }
+                Console.WriteLine("Process have been terminated");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
         }
     }
