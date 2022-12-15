@@ -18,7 +18,7 @@ namespace TaskManger
                 Console.WriteLine(ex.Message);
             }
         }
-       
+
         public static void getProcessAndItsThread()
         {
             Process theProc = null;
@@ -97,20 +97,34 @@ namespace TaskManger
         static void Main(string[] args)
         {
             Console.Title = "Task Manger";
-            /* var runningProcess = from proc in Process.GetProcesses()
-                                  orderby proc.Id
-                                  select proc;
 
-             foreach (var p in runningProcess)
-             {
-                 string info = $"Pid: {p.Id} \t Name: {p.ProcessName}";
-                 Console.WriteLine(info);
-             }*/
+        start: Console.WriteLine("What would you like to do \n 1. Check all runing Process" +
+              "\n 2. Start Process \n 3. Stop a process \n 4.Check if a thread isLive or Background " +
+              "\n 5. Exit");
+            string? option = Console.ReadLine();
 
-            //getProcessByItsID();
-            // getProcessAndItsThread();
-            // getProcessAndItsModules();
-            startAndStopProcess();
+            switch (option)
+            {
+                case "1":
+                    Console.Clear();
+                    TaskManger.GetAllRunningProcess();
+                    goto start;
+                case "2":
+                    Console.Clear();
+                    TaskManger.StartAProcess();
+                    goto start;
+                case "5":
+                    Console.WriteLine("Thank you bye");
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.Clear();
+                    Console.WriteLine($"{option} is an invalid Option, please Select a valid option");
+                    goto start;
+            }
+
+
+
         }
     }
 }
